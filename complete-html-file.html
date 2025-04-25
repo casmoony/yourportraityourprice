@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Portrait, Your Price | Interactive Art Value Project</title>
+    <style>
+        :root {
+            --primary-color: #3a3a3a;
+            --accent-color: #e67e22;
+            --bg-color: #f9f9f9;
+            --text-color: #333;
+            --light-gray: #e0e0e0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background-color: #f5f5f5;
+            margin-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 40px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #d35400;
+        }
+        
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: 400px;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .gallery-item {
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .feedback-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 16px;
+        }
+        
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        button {
+            padding: 12px 30px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #d35400;
+        }
+        
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        
+        .price-paid {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+        
+        .live-experience {
+            background-color: #faf0e6;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 40px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .live-experience h3 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        #testimonials-section {
+            display: none;
+        }
+        
+        .no-testimonials {
+            text-align: center;
+            padding: 40px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+        
+        /* Added styles for payment content */
+        .payment-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-top: 30px;
+        }
+        
+        .payment-text {
+            flex: 1;
+        }
+        
+        .payment-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: 400px;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .payment-options {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        
+        .payment-options li {
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .about-content, .payment-content {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Your Portrait, <span>Your Price</span></div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Live Experience</a></li>
+                <li><a href="#alternative-payment">Alternative Value</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#feedback">Share Feedback</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Your Portrait, Your Price</h1>
+            <p>An interactive experiment challenging traditional art pricing, exploring how art is valued, and discovering the worth of art in each of our hearts. In this unique art project, you decide the price of your portrait — from zero to infinity.</p>
+            <a href="#about" class="cta-button">Learn More</a>
+        </div>
+    </section>
+    
+    <section id="about">
+        <h2>About the Project</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>"Your Portrait, Your Price" is a project created by me, Omii Chen, a Visual Artist who is interested in exploring what artistic value means to people in contemporary society. Through this work, I seek to understand how we assign worth to art beyond traditional market metrics and institutional validation.</p>
+                <br>
+                <p>This project combines artistic creation with social experimentation. I will draw portraits for participants at art markets, but without setting a fixed price. Participants are free to decide how much they want to pay, or even receive the artwork for free.</p>
+                <br>
+                <p>The project was partly inspired by the rapid development of AI-generated visual art. In an era where artificial intelligence can quickly produce portraits in any style, the question arises: what gives art its true value? As AI continues to evolve, the worth of art increasingly depends on how we perceive and recognize artistic value beyond mere technical reproduction. This face-to-face portrait project offers a counterpoint to digital creation by emphasizing the human connection, presence, and shared experience that remain uniquely human aspects of art-making.</p>
+                <br>
+                <p>Through this approach, each transaction becomes a conversation about the value of art. Some may believe art should be shared freely, some might pay according to their financial ability, while others might decide the price based on the emotional resonance the work brings them.</p>
+                <br>
+                <p>This project is not just about drawing portraits, but a collective exploration of artistic values in our rapidly changing technological landscape. I invite you to participate in this experiment and reflect together on the meaning and value of art in modern society.</p>
+            </div>
+            <div class="about-image">
+                <!-- Image embedding example -->
+                <img src="images/artist-portrait.jpg" alt="Artist Omii Chen at work" style="width: 100%; height: 100%; object-fit: cover;">
+                <!-- If you don't have an image yet, you can use a placeholder: -->
+                <!-- <img src="https://via.placeholder.com/600x400" alt="Artist at work" style="width: 100%; height: 100%; object-fit: cover;"> -->
+            </div>
+        </div>
+    </section>
+    
+    <section id="experience">
+        <h2>The Importance of Live Experience</h2>
+        <div class="live-experience">
+            <h3>Why Face-to-Face Portraits Matter</h3>
+            <p>Creating portraits in person is at the heart of this project. This direct interaction creates a unique dimension that cannot be replicated through digital means or photography. Here's why this face-to-face experience is essential:</p>
+            <br>
+            <p><strong>For the Artist:</strong> Drawing someone in person presents both a challenge and an inspiration. It requires careful observation of not just physical features, but also personality and spirit. These observations become integrated into the artwork, capturing something deeper than mere appearance.</p>
+            <br>
+            <p><strong>For the Art Consumer:</strong> Witnessing the creative process unfold provides a powerful sense of presence and connection. You're not just purchasing a product; you're participating in an artistic moment. This immediacy creates a relationship with both the artist and the artwork that goes beyond commercial transaction.</p>
+            <br>
+            <p><strong>For the Art Experience:</strong> The face-to-face portrait session reminds us that no artistic creation is merely a commodity. It's a moment of human connection, translated through artistic skill into a tangible form. This project invites both artists and art consumers to reconsider the commercialization of art and reflect on what gives art its true value.</p>
+            <br>
+            <p>By participating in this project, you're not simply acquiring a portrait—you're engaging in a dialogue about art's value that begins with human connection and continues long after the drawing is complete.</p>
+        </div>
+    </section>
+    
+    <section id="alternative-payment">
+        <h2>Alternative Value Exchange</h2>
+        <div class="payment-content">
+            <div class="payment-text">
+                <p>The value of art extends far beyond monetary measurement. In the "Your Portrait, Your Price" project, we embrace a more holistic view of value by welcoming various forms of exchange:</p>
+                
+                <ul class="payment-options">
+                    <li><strong>Barter & Objects</strong> - Perhaps a handcrafted item you created, a book that holds special meaning to you, a local specialty from your hometown, or any object that represents value to you</li>
+                    <li><strong>Skill Exchange</strong> - Offer your professional skills or knowledge, such as photography services, professional consultation, cooking lessons, musical performances, etc.</li>
+                    <li><strong>Time Sharing</strong> - Exchange your valuable time by assisting with art events or sharing your story as creative inspiration</li>
+                    <li><strong>Emotional Connection</strong> - Leave your story, poem, or any form of feedback that enriches the meaning of this art project</li>
+                </ul>
+                
+                <p>Each exchange is a unique story and a reconsideration of the concept of "value." Through diverse exchange methods, we collectively explore how art can transcend commercial frameworks and return to the purest connection between people.</p>
+                <br>
+                <p>When participating in live events, please tell me how you would like to exchange for your portrait, and let's create an art experience that goes beyond currency.</p>
+            </div>
+            <div class="payment-image">
+                <!-- Added image container -->
+                <img src="images/value-exchange.jpg" alt="Alternative Value Exchange" style="width: 100%; height: 100%; object-fit: cover;">
+                <!-- Placeholder alternative: -->
+                <!-- <img src="https://via.placeholder.com/600x400" alt="Alternative Value Exchange" style="width: 100%; height: 100%; object-fit: cover;"> -->
+            </div>
+        </div>
+    </section>
+    
+    <section id="gallery">
+        <h2>Gallery</h2>
+        <div class="gallery">
+            <!-- Image embedding examples for gallery -->
+            <div class="gallery-item">
+                <img src="images/portrait1.jpg" alt="Portrait 1" style="width: 100%; height: 100%; object-fit: cover;">
+                <!-- Placeholder alternative: -->
+                <!-- <img src="https://via.placeholder.com/300x300" alt="Portrait 1" style="width: 100%; height: 100%; object-fit: cover;"> -->
+            </div>
+            <div class="gallery-item">
+                <img src="images/portrait2.jpg" alt="Portrait 2" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="gallery-item">
+                <img src="images/portrait3.jpg" alt="Portrait 3" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="gallery-item">
+                <img src="images/portrait4.jpg" alt="Portrait 4" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="gallery-item">
+                <img src="images/portrait5.jpg" alt="Portrait 5" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="gallery-item">
+                <img src="images/portrait6.jpg" alt="Portrait 6" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+    </section>
+    
+    <section id="feedback">
+        <h2>Share Your Feedback</h2>
+        <div class="feedback-form">
+            <form id="artFeedbackForm">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Amount You Paid (USD)</label>
+                    <input type="number" id="price" name="price" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="reason">Why Did You Choose This Amount?</label>
+                    <textarea id="reason" name="reason" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="thoughts">Your Thoughts on "Art Pricing"</label>
+                    <textarea id="thoughts" name="thoughts"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="experience">How did the live portrait experience affect your perception of the artwork's value?</label>
+                    <textarea id="experience" name="experience"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="publish">Do you agree to publish your feedback on the website?</label>
+                    <select id="publish" name="publish" required>
+                        <option value="yes">Yes, with my name</option>
+                        <option value="anonymous">Yes, but anonymously</option>
+                        <option value="no">No, for project research only</option>
+                    </select>
+                </div>
+                <button type="submit">Submit Feedback</button>
+            </form>
+        </div>
+    </section>
+    
+    <section id="testimonials">
+        <h2>Participant Testimonials</h2>
+        <div id="testimonials-container">
+            <div class="no-testimonials">
+                <p>Be the first to share your experience with this project!</p>
+                <p>Submit your feedback above and choose to publish it to see your testimonial here.</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>© 2025 Your Portrait, Your Price | Interactive Art Value Project</p>
+        <p>Contact: yourportraityourprice@gmail.com</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/omiichen/" target="_blank">Instagram</a>
+        </div>
+    </footer>
+    
+    <script>
+        // Feedback form submission handler
+        document.getElementById('artFeedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const price = document.getElementById('price').value;
+            const reason = document.getElementById('reason').value;
+            const publish = document.getElementById('publish').value;
+            
+            // If user agrees to publish feedback, add it to testimonials
+            if (publish === 'yes' || publish === 'anonymous') {
+                // Get testimonials container
+                const testimonialsContainer = document.getElementById('testimonials-container');
+                
+                // Remove "no testimonials" message if it exists
+                const noTestimonials = document.querySelector('.no-testimonials');
+                if (noTestimonials) {
+                    noTestimonials.remove();
+                }
+                
+                // Create testimonial card
+                const testimonialCard = document.createElement('div');
+                testimonialCard.className = 'testimonial-card';
+                
+                // Add testimonial content
+                testimonialCard.innerHTML = `
+                    <p class="testimonial-text">"${reason}"</p>
+                    <p class="testimonial-author">— ${publish === 'anonymous' ? 'Anonymous' : name}</p>
+                    <p class="price-paid">Amount paid: $${price}</p>
+                `;
+                
+                // Add to start of testimonials container
+                testimonialsContainer.prepend(testimonialCard);
+                
+                // Limit to 3 testimonials
+                const allTestimonials = testimonialsContainer.querySelectorAll('.testimonial-card');
+                if (allTestimonials.length > 3) {
+                    testimonialsContainer.removeChild(allTestimonials[allTestimonials.length - 1]);
+                }
+                
+                // Show testimonials section if it was hidden
+                document.getElementById('testimonials-section').style.display = 'block';
+            }
+            
+            // Show success message and reset form
+            alert('Thank you for your feedback! We have received your valuable opinion.');
+            this.reset();
+        });
+        
+        // Initialize testimonials section
+        window.addEventListener('DOMContentLoaded', () => {
+            const testimonialsContainer = document.getElementById('testimonials-container');
+            const noTestimonials = document.querySelector('.no-testimonials');
+            
+            // Check if there are testimonials
+            if (testimonialsContainer.querySelectorAll('.testimonial-card').length === 0) {
+                if (!noTestimonials) {
+                    testimonialsContainer.innerHTML = `
+                        <div class="no-testimonials">
+                            <p>Be the first to share your experience with this project!</p>
+                            <p>Submit your feedback above and choose to publish it to see your testimonial here.</p>
+                        </div>
+                    `;
+                }
+            } else {
+                if (noTestimonials) {
+                    noTestimonials.remove();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
